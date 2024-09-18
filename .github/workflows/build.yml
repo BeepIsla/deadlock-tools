@@ -20,7 +20,7 @@ jobs:
 
             - name: Run CMake
               run: |
-                  cmake -S./extension -B./build
+                  cmake -S./server-match -B./build
                   cmake --build ./build --config Release
 
             - name: Upload
