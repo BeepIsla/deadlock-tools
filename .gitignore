@@ -1,0 +1,10 @@
+.vs
+.vscode
+.cache
+bin
+obj
+build
+pick-bans
+*.jsonc
+*.json
+!server-match/match.jsonc

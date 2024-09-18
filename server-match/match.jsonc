@@ -1,0 +1,23 @@
+{
+	"match_mode": "ranked", // Valid: See ECitadelMatchMode enum in 'submodules/protobufs/deadlock/citadel_gcmessages_common.proto'. Optional, default "ranked"
+	"game_mode": "normal", // Valid: See ECitadelGameMode enum in 'submodules/protobufs/deadlock/citadel_gcmessages_common.proto'. Optional, default "normal"
+	"map": "street_test", // Valid: Any map name from "maps *" command. Optional, default "street_test"
+	"broadcast": "https://your.deadlock.server/http_broadcast", // HTTP(S) URL for broadcasting. Optional, see https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Broadcast for more information
+	"console": "sv_cheats true; citadel_weapon_damage_multiplier 100;", // Any extra console commands you want to exceute on the server. Optional
+	"players": [
+		{
+			"steam_id": "[U:1:1]", // Any SteamID format works here
+			"name": "Terry", // Default name of this client, overwritten when the client joins. Optional, default same as SteamID
+			"team": "amber", // Valid: "amber", "sapphire", "spectator", or see ECitadelMatchMode enum in 'submodules/protobufs/deadlock/citadel_gcmessages_common.proto'
+			"lane": "yellow", // Valid: "yellow", "green", "blue", "purple", (Does not work yet, lane does not seem to be random but I also don't know what determines it)
+			"hero": 1 // Valid: Hero index, use our dumper or see "game/citadel/pak01_dir.vpk/scripts/heroes.vdata"
+		},
+		{
+			"steam_id": "[U:1:2]", // Any SteamID format works here
+			"name": "Davis", // Default name of this client, overwritten when the client joins. Optional, default same as SteamID
+			"team": "sapphire", // Valid: "amber", "sapphire", "spectator", or see ECitadelMatchMode enum in 'submodules/protobufs/deadlock/citadel_gcmessages_common.proto'
+			"lane": "green", // Valid: "yellow", "green", "blue", "purple", (Does not work yet, lane does not seem to be random but I also don't know what determines it)
+			"hero": 1 // Valid: Hero index, use our dumper or see "game/citadel/pak01_dir.vpk/scripts/heroes.vdata"
+		}
+	]
+}
