@@ -177,7 +177,6 @@ inline std::optional<ECitadelLobbyTeam> ConvertTeam(const std::string &s)
 	if (lower == "spectator")
 		return k_ECitadelLobbyTeam_Spectator;
 
-	// TODO: Is "amber" team0 and "sapphire" team1?
 	// Extra
 	if (lower == "amber")
 		return k_ECitadelLobbyTeam_Team0;
@@ -539,7 +538,6 @@ EGCResults ISteamGameCoordinator__SendMessage(ISteamGameCoordinator *self, uint3
 	{
 		Msg("CMsgServerToGCEnterMatchmaking (Header)\n{}\n(Body)\n{}", header.Utf8DebugString(), msg->Utf8DebugString());
 
-		// TODO: Make this a proper safe guard
 		if (object_cache.sent_lobby)
 		{
 			for (int i = 0; i < 5; i++)
