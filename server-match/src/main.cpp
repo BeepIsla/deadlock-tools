@@ -26,6 +26,14 @@
 #undef SendMessage
 #endif
 
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
 typedef void (*MsgFn)(const char *fmt, ...);
 
 const uint32_t k_EMsgProtoBufFlag = 0x80000000;
