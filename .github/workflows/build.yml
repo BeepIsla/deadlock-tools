@@ -28,5 +28,5 @@ jobs:
               with:
                   name: server-match
                   path: |
-                      ${{ github.workspace }}/build/bin/server-match.exe
-                      ${{ github.workspace }}/build/bin/server-match.pdb
+                      ${{ github.workspace }}/build/bin/Release/server-match.exe
+                      ${{ github.workspace }}/build/bin/Release/server-match.pdb
