@@ -63,7 +63,12 @@ struct ObjectCache
 	static constexpr int ServerStaticLobby  = 102;
 	static constexpr int ServerDynamicLobby = 106;
 
-	CSOCitadelLobby              lobby; // Not sure if we need this too, its the only place with match_id, gamemode, etc. Probably?
+	// Lane assignments appear to be based on MMR and the server decides this.
+	// We have no direct control over this with just faking GC stuff.
+	// We can influence the server math by providing a `CServerLobbyData_PlayerMMR` protobuf in `extra_messages`.
+	// Not sure where we would do this, `CSOCitadelLobby` and `CSOCitadelServerStaticLobby` both have such a field, which one do we use?
+	// We'll probably just hook a function on the server in the future to force specific lane assignments.
+	CSOCitadelLobby              lobby;
 	CSOCitadelServerStaticLobby  static_lobby;
 	CSOCitadelServerDynamicLobby dynamic_lobby;
 
