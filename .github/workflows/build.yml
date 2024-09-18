@@ -15,6 +15,28 @@ jobs:
               with:
                   submodules: recursive
 
+            - name: Cache CMake dependency source code
+              uses: actions/cache@v4
+              env:
+                  cache-name: cache-cmake-dependency-sources
+              with:
+                  path: ${{github.workspace}}/build/_deps/*-src
+                  key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt') }}
+                  restore-keys: |
+                      ${{ env.cache-name }}-
+
+            - name: Cache CMake dependency build objects
+              uses: actions/cache@v4
+              env:
+                  cache-name: cache-cmake-dependency-builds
+              with:
+                  path: |
+                      ${{github.workspace}}/build/_deps/*-build
+                      ${{github.workspace}}/build/_deps/*-subbuild
+                  key: ${{ env.cache-name }}-windows-latest-msvc-${{ hashFiles('**/CMakeLists.txt') }}
+                  restore-keys: |
+                      ${{ env.cache-name }}-windows-latest-msvc-
+
             - name: Download CMake
               uses: lukka/get-cmake@latest
 
