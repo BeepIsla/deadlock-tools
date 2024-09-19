@@ -13,4 +13,6 @@ The game also sends performance statistics to Steam automatically, you can disab
 
 Stats will be dumped next to the `match.json` file in `result.json`. We are not able to add our own custom stat tracking to this, it is just what the server already tracks.
 
+The server will automatically cancel the match after ~3 minutes! Make sure all players are ready to join when you boot the server.
+
 _Linux compatibility will come once there are binaries for it_
