@@ -63,11 +63,6 @@ struct ObjectCache
 	static constexpr int ServerStaticLobby  = 102;
 	static constexpr int ServerDynamicLobby = 106;
 
-	// Lane assignments appear to be based on MMR and the server decides this.
-	// We have no direct control over this with just faking GC stuff.
-	// We can influence the server math by providing a `CServerLobbyData_PlayerMMR` protobuf in `extra_messages`.
-	// Not sure where we would do this, `CSOCitadelLobby` and `CSOCitadelServerStaticLobby` both have such a field, which one do we use?
-	// We'll probably just hook a function on the server in the future to force specific lane assignments.
 	CSOCitadelLobby              lobby;
 	CSOCitadelServerStaticLobby  static_lobby;
 	CSOCitadelServerDynamicLobby dynamic_lobby;
@@ -197,6 +192,31 @@ inline std::optional<ECitadelLobbyTeam> ConvertTeam(const std::string &s)
 		return k_ECitadelLobbyTeam_Team1;
 	if (lower == "spec")
 		return k_ECitadelLobbyTeam_Spectator;
+	return std::nullopt;
+}
+
+inline std::optional<CMsgLaneColor> ConvertLane(const std::string &s)
+{
+	// Try to parse directly
+	CMsgLaneColor value = k_ELaneColor_Invalid;
+	if (CMsgLaneColor_Parse(s, &value))
+		return value;
+
+	std::string lower(s.size(), '\0');
+	std::transform(s.begin(), s.end(), lower.begin(), [](char c) -> char {
+		return std::tolower(c);
+	});
+
+	if (lower == "invalid")
+		return k_ELaneColor_Invalid;
+	if (lower == "yellow")
+		return k_ELaneColor_Yellow;
+	if (lower == "green")
+		return k_ELaneColor_Green;
+	if (lower == "blue")
+		return k_ELaneColor_Blue;
+	if (lower == "purple")
+		return k_ELaneColor_Purple;
 	return std::nullopt;
 }
 
@@ -468,6 +488,16 @@ inline bool ParseMatchInformation()
 					return false;
 				}
 
+				if (std::optional<CMsgLaneColor> lane = ConvertLane(it->value("lane", "")))
+				{
+					member->set_lane_id(lane.value());
+				}
+				else
+				{
+					Msg("Entry in 'players' array has invalid 'lane' field");
+					return false;
+				}
+
 				if (!it->contains("hero") || !it->operator[]("hero").is_number())
 				{
 					Msg("Entry in 'players' array has invalid 'hero' field");
@@ -483,7 +513,7 @@ inline bool ParseMatchInformation()
 				member->set_is_comms_restricted(false);
 
 				// Some neat log
-				Msg("Added player '{}' to team '{}' in lane '{}' on hero '{}'", member->account_id(), ECitadelLobbyTeam_Name(member->team()), "<unknown>", member->hero_id());
+				Msg("Added player '{}' to team '{}' in lane '{}' on hero '{}'", member->account_id(), ECitadelLobbyTeam_Name(member->team()), member->lane_id(), member->hero_id());
 			}
 		}
 		else

@@ -9,14 +9,14 @@
 			"steam_id": "[U:1:1]", // Any SteamID format works here
 			"name": "Terry", // Default name of this client, overwritten when the client joins. Optional, default same as SteamID
 			"team": "amber", // Valid: "amber", "sapphire", "spectator", or see ECitadelMatchMode enum in 'submodules/protobufs/deadlock/citadel_gcmessages_common.proto'
-			"lane": "yellow", // Valid: "yellow", "green", "blue", "purple", (Does not work yet, lane does not seem to be random but I also don't know what determines it)
+			"lane": "yellow", // Valid: "yellow", "green", "blue", "purple", and "invalid"
 			"hero": 1 // Valid: Hero index, use our dumper or see "game/citadel/pak01_dir.vpk/scripts/heroes.vdata"
 		},
 		{
 			"steam_id": "[U:1:2]", // Any SteamID format works here
 			"name": "Davis", // Default name of this client, overwritten when the client joins. Optional, default same as SteamID
 			"team": "sapphire", // Valid: "amber", "sapphire", "spectator", or see ECitadelMatchMode enum in 'submodules/protobufs/deadlock/citadel_gcmessages_common.proto'
-			"lane": "green", // Valid: "yellow", "green", "blue", "purple", (Does not work yet, lane does not seem to be random but I also don't know what determines it)
+			"lane": "green", // Valid: "yellow", "green", "blue", "purple", and "invalid"
 			"hero": 1 // Valid: Hero index, use our dumper or see "game/citadel/pak01_dir.vpk/scripts/heroes.vdata"
 		}
 	]
