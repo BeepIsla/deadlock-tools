@@ -401,6 +401,8 @@ inline bool ParseMatchInformation()
 	object_cache.static_lobby.set_region_mode(k_ECitadelRegionMode_ROW);
 	object_cache.static_lobby.set_new_player_pool(false);
 	object_cache.static_lobby.set_low_pri_pool(false);
+	object_cache.static_lobby.set_is_restricted_access(false);
+	object_cache.static_lobby.set_cheats_enabled(false);
 	object_cache.dynamic_lobby.set_lobby_id(1);
 	object_cache.dynamic_lobby.clear_left_account_ids();
 	object_cache.dynamic_lobby.set_spectator_count(0);
